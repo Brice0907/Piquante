@@ -10,5 +10,6 @@ router.get('/', auth, Productcontroller.all)
 router.get('/:id', auth, Productcontroller.one)
 router.delete('/:id', auth, Productcontroller.suppr)
 router.put('/:id', auth, multer, Productcontroller.modif)
+router.post('/:id/like', auth, Productcontroller.liked)
 
 export default router
