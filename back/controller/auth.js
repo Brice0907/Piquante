@@ -24,18 +24,18 @@ export const login = async (req, res, next) => {
     try {
         const user = await User.findOne({ email: req.body.email })
         if (!user) {
-            return res.status(401).json({ message: 'Identifiant/Mot de passe incorrecte' })
+            return res.status(401).json({ message: 'Identifiant/Mot de passe incorrect' })
         }
         const valid = await bcrypt.compare(req.body.password, user.password)
         if (!valid) {
-            return res.status(401).json({ message: 'Identifiant/Mot de passe incorrecte' })
+            return res.status(401).json({ message: 'Identifiant/Mot de passe incorrect' })
         }
         res.status(200).json({
             userId: user._id,
             token: jsonwebtoken.sign(
                 { userId: user._id },
                 'RANDOM_TOKEN_SECRET',
-                { expiresIn: '24h' }
+                { expiresIn: '12h' }
             )
         })
     } catch (error) {

@@ -4,6 +4,7 @@ import cors from "cors";
 import Authroute from "./route/auth.js";
 import Productroute from "./route/product.js";
 import path from 'path';
+import helmet from "helmet";
 import {fileURLToPath} from 'url';
 
 const __filename = fileURLToPath(import.meta.url)
@@ -21,8 +22,8 @@ const app = Express()
 app.use(cors())
 app.use(Express.json())
 
-app.use('/api/auth', Authroute)
-app.use('/api/sauces', Productroute)
+app.use('/api/auth', helmet(),Authroute)
+app.use('/api/sauces', helmet(),Productroute)
 app.use('/images', Express.static(path.join(__dirname, 'images')))
 
 export default app
